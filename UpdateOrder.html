@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body style="background-image: url(hk1.jpg);">
+    <h1 style="text-align: center; color: navy;">Library Management System</h1>
+ 
+    
+    <div id="div5">
+        <h1>Update Order</h1>
+       <div >
+           <label>OrderId</label>
+          <input type="text" id="updateorderId"> 
+          <label> CustomerName</label>
+          <input type="text" id="custName">
+          <button onclick="updateOrder()"> Update Order</button>
+          <p id="seachP"> </p>
+        </div>
+        <button><a href="index.html"> <strong> Home Page </strong> </button>
+        <button><a href="OrderList.html"> <strong> OrderList </strong> </button>
+
+
+    <script>
+        
+
+    function updateOrder(){
+            const orderId = document.getElementById('updateorderId').value;
+            const custName = document.getElementById('custName').value;
+            const data = {
+              customerName : custName
+              }
+            axios.patch(`https://simple-books-api.glitch.me/orders/${orderId}`, data, {
+         headers: {
+            Authorization: `Bearer be9788ca7d8a6a7159f37ebdb643b0236197345ad859817079bb97efd29e05f9`
+            }
+             })
+            .then(response => {
+            console.log(response);
+       
+             })
+            .catch(error => {
+         console.error( error);
+             });
+        }
+
+
+    
+    </script>
+
+</body>
+</html>

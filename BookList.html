@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body style="background-image: url(hk1.jpg);">
+    <h1 style="text-align: center; color: navy;">Library Management System</h1>
+ 
+    <div id="div1">
+        <div style="align-content: center;">
+        <h1>Book List</h1>
+        <button id="books" onclick="fetchData()">Get All Books</button>
+        <table id="bookTable" ></table>
+    </div>
+    </div>
+    
+    <button><a href="index.html"> <strong>Home Page</strong> </button>
+    
+
+    <script>
+        function fetchData() {
+            axios.get("https://simple-books-api.glitch.me/books")
+                .then(response => {
+                    let html = "<tr><th>Book ID</th><th>Book Name</th><th>Type</th><th>Availability</th></tr>";
+                    response.data.forEach(book => {
+                        html += `<tr><td>${book.id}</td><td>${book.name}</td><td>${book.type}</td><td>${book.available ? "Yes" : "No"}</td></tr>`;
+                    });
+                    document.querySelector("#bookTable").innerHTML = html;
+                })
+                .catch(error => console.error(error));
+        }
+
+    </script>
+
+</body>
+</html>

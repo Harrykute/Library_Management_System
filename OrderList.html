@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body style="background-image: url(hk1.jpg);">
+    <h1 style="text-align: center; color: navy;">Library Management System</h1>
+ 
+    <div id="div4">
+        <h1>Booked Order List</h1>
+        <button id="orders" onclick="getAllOrder()">Get All Orders</button>
+        <table id="ordersTable">
+        </table>
+    </div>
+    
+    <button><a href="index.html"> <strong>Home Page</strong> </button>
+
+    <script>
+        
+
+    function getAllOrder() {
+        axios.get('https://simple-books-api.glitch.me/orders', {
+            headers: {
+                Authorization: `Bearer be9788ca7d8a6a7159f37ebdb643b0236197345ad859817079bb97efd29e05f9`
+            }
+        })
+        .then(response => {
+            const orders = response.data;
+            let html = `
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Quantity</th>
+                </tr>`;
+            orders.forEach(order => {
+                html += `
+                    <tr>
+                        <td>${order.id}</td>
+                        <td>${order.customerName}</td>
+                        <td>${order.quantity}</td>
+                    </tr>`;
+            });
+            document.getElementById("ordersTable").innerHTML = html;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }
+
+    
+   
+
+
+   
+    
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body style="background-image: url(hk1.jpg);">
+    <h1 style="text-align: center; color: navy;">Library Management System</h1>
+    <h1>Submit Order</h1>
+    <div id="div3">
+        <h3 > Order Books </h3>
+       <input type="number" id="orderId" placeholder="BookID"> 
+       <input type="text" id="customerName" placeholder="CustomerNAme">
+       <button onclick="Order()" > Booked Order</button>
+       <p id="seachP"> </p>
+      </div>
+
+      <button><a href="index.html"> <strong>Home Page</strong> </button>
+        <button><a href="OrderList.html"> <strong>Booked OrderList Page</strong> </button>
+
+    <script>
+       
+    
+    function Order(){
+      const bookId = parseInt(document.getElementById("orderId").value);
+      const custName = document.getElementById("customerName").value;
+      console.log(bookId, custName);
+
+      const accessToken = "be9788ca7d8a6a7159f37ebdb643b0236197345ad859817079bb97efd29e05f9";
+
+      axios.post("https://simple-books-api.glitch.me/orders/", {
+            bookId: bookId,
+            customerName: custName
+        }, {
+            headers: {  
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => {
+            console.log('Order created:', response.data);
+        })
+        .catch((error) => {
+            console.error('Error creating order:', error);
+        });
+        }
+
+
+  
+
+    
+    </script>
+
+</body>
+</html>
